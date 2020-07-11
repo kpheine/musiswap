@@ -4,21 +4,21 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
+    "@testing-library/react": "^10.4.5",
     "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.47",
+    "@types/node": "^14.0.22",
     "@types/react-dom": "^16.9.8",
     "axios": "^0.19.2",
     "googleapis": "^52.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-google-login": "^5.1.20",
+    "react-google-login": "^5.1.21",
     "react-icons": "^3.10.0",
     "react-scripts": "3.4.1",
     "react-spotify-login": "^0.9.1",
     "react-transition-group": "^4.4.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.9.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -42,7 +42,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react": "^16.9.41",
+    "@types/react": "^16.9.42",
     "@types/react-transition-group": "^4.4.0",
     "@types/spotify-api": "0.0.3"
   }
