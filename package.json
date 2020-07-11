@@ -18,7 +18,7 @@
     "react-scripts": "3.4.1",
     "react-spotify-login": "^0.9.1",
     "react-transition-group": "^4.4.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.9.6"
   },
   "scripts": {
     "start": "react-scripts start",
