@@ -4,7 +4,7 @@ import { GoogleApis } from 'googleapis';
 
 import { FaYoutube } from 'react-icons/fa';
 
-import {googleApiKey} from '../../settings.js'
+import { googleApiKey } from '../../settings.js';
 
 const name = 'anon';
 
@@ -16,11 +16,14 @@ function Youtube() {
     redirectUri: '',
   });
 
-  const url = oauth.generateAuthUrl()
-  const {tokens} = await oauth.getToken()
+  const url = oauth.generateAuthUrl();
   return (
     <div className='youtube-root neumorph-in'>
       <FaYoutube className='icon-youtube' size={100} />
       <p>{!name ? 'User not logged' : `Welcome ${name}!`}</p>
       <a href={url}>gimme authentication daddy</a>
-    </div> 
+    </div>
+  );
+}
+
+export default Youtube;
