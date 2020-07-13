@@ -30,6 +30,7 @@ function Spotify() {
   const [trackList, setTrackList] = useState<Array<TrackData>>([]);
 
   const endpointUrl = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50';
+  const localUrl = location.origin;
 
   const getMusic = () => {
     setLoadingMusic(true);
@@ -76,7 +77,7 @@ function Spotify() {
         <SpotifyLogin
           className='sbutton neumorph'
           clientId={spotifyClientId}
-          redirectUri={sporifyRedirectUri}
+          redirectUri={localUrl}
           onSuccess={(e: Token) => {
             setToken(e);
             getUserInfos(e.access_token).then((res) => {
