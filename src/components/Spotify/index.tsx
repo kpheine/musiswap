@@ -30,7 +30,7 @@ function Spotify() {
   const [trackList, setTrackList] = useState<Array<TrackData>>([]);
 
   const endpointUrl = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50';
-  const localUrl = location.origin;
+  const localUrl = window.location.origin;
 
   const getMusic = () => {
     setLoadingMusic(true);
