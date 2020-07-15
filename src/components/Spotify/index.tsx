@@ -33,7 +33,7 @@ function Spotify(props: SpotifyProps) {
   const localUrl = window.location.origin;
 
   useEffect(() => {
-    return props.setTracks(...trackList);
+    return props.setTracks(trackList);
   }, [loadingMusic]);
 
   const getMusic = () => {
@@ -76,7 +76,7 @@ function Spotify(props: SpotifyProps) {
         alt={name}
         onLoad={() => setPhotoLoaded(true)}
       />
-      <p>{!name ? 'User not logged' : `Welcome ${name}!`}</p>
+      <p>{!name ? null : `Welcome ${name}!`}</p>
       {!token ? (
         <SpotifyLogin
           className='sbutton neumorph'

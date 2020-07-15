@@ -56,7 +56,7 @@ function Youtube(props: youtubeProps) {
         alt={user?.name}
         onLoad={() => setPhotoLoaded(true)}
       />
-      <p>{user ? `You're set, ${user.name}` : 'User not logged'}</p>
+      <p>{user ? `You're set, ${user.name}` : null}</p>
       {token ? null : (
         <GoogleLogin
           clientId={googleClientId}
@@ -74,23 +74,9 @@ function Youtube(props: youtubeProps) {
               Login Google
             </button>
           )}
+          scope={'https://www.googleapis.com/auth/youtube'}
         />
       )}
-      <button
-        onClick={() => {
-          console.log(props.tracks);
-          console.log(token);
-          searchRequest(
-            token,
-            // @ts-ignore
-            `${props.tracks.artist} ${props.tracks.name}`,
-          ).then((res) => {
-            console.log(res);
-          });
-        }}
-      >
-        search one track
-      </button>
     </div>
   );
 }
