@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './spotify.css';
 import { getUserInfos, likedTracksRequest } from '../../services/spotify';
 import YesIMadeAProgressBarSoWhat from '../YesIMadeAProgressBarSoWhat';
+import { TrackData } from '../../App';
 
 //@ts-ignore
 import SpotifyLogin from 'react-spotify-login';
-import { spotifyClientId, sporifyRedirectUri } from '../../settings.js';
+import { spotifyClientId } from '../../settings.js';
 
-import { FaSpotify, FaUserSecret } from 'react-icons/fa';
+import { FaSpotify } from 'react-icons/fa';
 
 interface Token {
   access_token: string;
@@ -15,12 +16,11 @@ interface Token {
   expires_in: string;
 }
 
-interface TrackData {
-  name: string;
-  artist: string;
-}
+type SpotifyProps = {
+  setTracks: Function;
+};
 
-function Spotify() {
+function Spotify(props: SpotifyProps) {
   const [token, setToken] = useState<Token>();
   const [name, setName] = useState<string>();
   const [imageUrl, setImageUrl] = useState<string>();
@@ -31,6 +31,10 @@ function Spotify() {
 
   const endpointUrl = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50';
   const localUrl = window.location.origin;
+
+  useEffect(() => {
+    return props.setTracks(...trackList);
+  }, [loadingMusic]);
 
   const getMusic = () => {
     setLoadingMusic(true);
