@@ -1,3 +1,5 @@
+![Build](https://github.com/accuvit/musiswap/workflows/Build/badge.svg)
+
 # Musiswap
 
 An easy way to convert your Spotify playlists to YouTube
