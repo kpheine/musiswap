@@ -31,6 +31,11 @@ function Youtube(props: youtubeProps) {
   const [imageUrl, setImageUrl] = useState<string>();
   const [photoLoaded, setPhotoLoaded] = useState<boolean>(false);
 
+  const importTracks = () => {
+    const playlistName:string = 'Musiswap'
+    console.log(props.tracks);
+  };
+
   //Callback from Google login (god I hate so much union types)
   const successCallback = (
     res: GoogleLoginResponse | GoogleLoginResponseOffline,
@@ -57,7 +62,11 @@ function Youtube(props: youtubeProps) {
         onLoad={() => setPhotoLoaded(true)}
       />
       <p>{user ? `You're set, ${user.name}` : null}</p>
-      {token ? null : (
+      {token ? (
+        <button className={'loginButton neumorph'} onClick={importTracks}>
+          Import selected tracks
+        </button>
+      ) : (
         <GoogleLogin
           clientId={googleClientId}
           onSuccess={successCallback}

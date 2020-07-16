@@ -31,9 +31,10 @@ function Spotify(props: SpotifyProps) {
 
   const endpointUrl = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50';
   const localUrl = window.location.origin;
+  const setTracks: Function = props.setTracks;
 
   useEffect(() => {
-    return props.setTracks(trackList);
+    return setTracks(trackList);
   }, [loadingMusic]);
 
   const getMusic = () => {
@@ -45,12 +46,11 @@ function Spotify(props: SpotifyProps) {
     likedTracksRequest(token?.access_token || '', url).then((res) => {
       let tempList: Array<TrackData> = [];
       const data: SpotifyApi.UsersSavedTracksResponse = res.data;
-      data.items.map((item) => {
-        const newData: TrackData = {
+      tempList = data.items.map((item) => {
+        return {
           name: item.track.name,
           artist: item.track.artists[0].name,
         };
-        tempList.push(newData);
       });
 
       setTrackList((prevState) => {
