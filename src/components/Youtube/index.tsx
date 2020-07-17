@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './youtube.css';
 import { googleClientId } from '../../settings';
 import { TrackData } from '../../App';
-import { searchRequest } from '../../services/youtube';
+import { addTrack, addPlaylist } from '../../services/youtube';
 
 import {
   GoogleLogin,
@@ -11,6 +11,7 @@ import {
 } from 'react-google-login';
 
 import { FaYoutube } from 'react-icons/fa';
+import { AxiosResponse } from 'axios';
 
 interface User {
   googleId: string;
@@ -25,6 +26,45 @@ type youtubeProps = {
   tracks: Array<TrackData>;
 };
 
+type YoutubeAddPlaylistResponse = {
+  kind: string;
+  etag: string;
+  id: string;
+  snippet: {
+    publishedAt: string;
+    channelId: string;
+    title: string;
+    description: string;
+    thumbnails: {
+      default: {
+        url: string;
+        width: number;
+        height: number;
+      };
+      medium: {
+        url: string;
+        width: number;
+        height: number;
+      };
+      high: {
+        url: string;
+        width: number;
+        height: number;
+      };
+    };
+    channelTitle: string;
+    tags: Array<string>;
+    defaultLanguage: string;
+    localized: {
+      title: string;
+      description: string;
+    };
+  };
+  status: {
+    privacyStatus: string;
+  };
+};
+
 function Youtube(props: youtubeProps) {
   const [token, setToken] = useState<string>('');
   const [user, setUser] = useState<User>();
@@ -32,8 +72,16 @@ function Youtube(props: youtubeProps) {
   const [photoLoaded, setPhotoLoaded] = useState<boolean>(false);
 
   const importTracks = () => {
-    const playlistName:string = 'Musiswap'
-    console.log(props.tracks);
+    const playlistName: string = 'Musiswap';
+    const miniList = props.tracks.slice(0, 11);
+    addPlaylist(token, playlistName).then(
+      (res: AxiosResponse<YoutubeAddPlaylistResponse>) => {
+        const playlistCode = res.data.id;
+        miniList.forEach((item, index) => {
+          addTrack(token, item, playlistCode);
+        });
+      },
+    );
   };
 
   //Callback from Google login (god I hate so much union types)
@@ -61,11 +109,15 @@ function Youtube(props: youtubeProps) {
         alt={user?.name}
         onLoad={() => setPhotoLoaded(true)}
       />
-      <p>{user ? `You're set, ${user.name}` : null}</p>
+      <p>{user ? `You're set, ${user.givenName}` : null}</p>
       {token ? (
-        <button className={'loginButton neumorph'} onClick={importTracks}>
-          Import selected tracks
-        </button>
+        props.tracks.length > 0 ? (
+          <button className={'loginButton neumorph'} onClick={importTracks}>
+            Import selected tracks
+          </button>
+        ) : (
+          <div />
+        )
       ) : (
         <GoogleLogin
           clientId={googleClientId}
