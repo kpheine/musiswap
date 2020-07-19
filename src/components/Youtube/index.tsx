@@ -71,17 +71,21 @@ function Youtube(props: youtubeProps) {
   const [imageUrl, setImageUrl] = useState<string>();
   const [photoLoaded, setPhotoLoaded] = useState<boolean>(false);
 
-  const importTracks = () => {
+  const importTracks = async () => {
     const playlistName: string = 'Musiswap';
     const miniList = props.tracks.slice(0, 11);
-    addPlaylist(token, playlistName).then(
-      (res: AxiosResponse<YoutubeAddPlaylistResponse>) => {
+    await addPlaylist(token, playlistName).then(
+      async (res: AxiosResponse<YoutubeAddPlaylistResponse>) => {
         const playlistCode = res.data.id;
-        miniList.forEach((item, index) => {
-          addTrack(token, item, playlistCode);
-        });
+        for (const item of miniList) {
+          const response = await addTrack(token, item, playlistCode);
+          console.log(response);
+        }
+        console.log(miniList);
       },
     );
+
+    //Check consistency of data (Because Youtube API is VERY misleading with 200 status)
   };
 
   //Callback from Google login (god I hate so much union types)

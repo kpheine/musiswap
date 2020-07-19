@@ -2,6 +2,8 @@ import axios, { AxiosResponse } from 'axios';
 import { googleApiKey } from '../settings';
 import { TrackData } from '../App';
 
+// TODO: REMOVE ALL AXIOS CRAP AND CHANGE DO GOOGLEAPIS NODE LIBRARY
+
 function searchRequest(
   token: string,
   query: string,
@@ -19,14 +21,23 @@ function searchRequest(
   });
 }
 
-function addTrack(token: string, track: TrackData, playlistId: string) {
+async function addTrack(token: string, track: TrackData, playlistId: string) {
   const query = `${track.artist} ${track.name}`;
-  searchRequest(token, query).then((res: AxiosResponse) => {
+  /* searchRequest(token, query).then((res: AxiosResponse) => {
     const videoId: string = res.data.items[0].id.videoId;
+    console.log(`video searched - ${videoId}`);
     addVideoToPlaylist(token, videoId, playlistId).then((res) => {
-      console.log('eita porra eita caralho vai la ver');
+      console.log(`video added - ${videoId}`)
     });
-  });
+  }); */
+  const searchResponse = await searchRequest(token, query);
+  const videoId = searchResponse.data.items[0].id.videoId;
+  const addPlaylistResponse = await addVideoToPlaylist(
+    token,
+    videoId,
+    playlistId,
+  );
+  return addPlaylistResponse.data;
 }
 
 function addVideoToPlaylist(
