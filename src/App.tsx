@@ -16,10 +16,10 @@ function App() {
         <span className='neutext'>SpoTube</span>
       </div> */}
       <div className='main'>
-        <div className='spotify'>
+        <div className='spotify halfPart'>
           <Spotify setTracks={setTracks} />
         </div>
-        <div className='youtube'>
+        <div className='youtube halfPart'>
           <Youtube tracks={tracks} />
         </div>
       </div>
