@@ -2,7 +2,7 @@
   "name": "musiswap",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://accuvit.github.io/musiswap",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.1",
     "@testing-library/react": "^10.4.7",
@@ -11,6 +11,7 @@
     "@types/node": "^14.0.22",
     "@types/react-dom": "^16.9.8",
     "axios": "^0.19.2",
+    "gh-pages": "^3.1.0",
     "googleapis": "^52.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -22,6 +23,8 @@
     "typescript": "^3.9.6"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts --max_old_space_size=8192 build",
     "test": "react-scripts test",
