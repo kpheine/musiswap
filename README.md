@@ -4,6 +4,8 @@
 
 An easy way to convert your Spotify playlists to YouTube
 
+[Access the latest version here!](https://accuvit.github.io/musiswap/)
+
 ## Status
 
 We're still under construction, see the issues page if you want to help :)
