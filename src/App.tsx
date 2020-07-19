@@ -20,7 +20,7 @@ function App() {
           <Spotify setTracks={setTracks} />
         </div>
         <div className='youtube'>
-          <Youtube tracks={tracks}/>
+          <Youtube tracks={tracks} />
         </div>
       </div>
     </div>

@@ -20,6 +20,8 @@ type SpotifyProps = {
   setTracks: Function;
 };
 
+let IdsList: Array<string> = [];
+
 function Spotify(props: SpotifyProps) {
   const [token, setToken] = useState<Token>();
   const [name, setName] = useState<string>();
