@@ -22,3 +22,12 @@ And that's it!
 
 You can modify all you want, then just pull request to develop
 
+## Resources
+
+This app was made mainly using:
+
+* React
+* TypeScript
+* Spotify API
+* YouTube Data API v3
+* Github Pages
