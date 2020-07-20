@@ -22,7 +22,7 @@ function App() {
     <div className='App'>
       <div className='infoDiv'>
         <a
-          href='https://github.com/accuvit/musiswap/blob/develop/README.md'
+          href='https://github.com/accuvit/musiswap/blob/develop/USERGUIDE.md'
           target='_blank'
           rel='noopener noreferrer'
         >
