@@ -12,7 +12,7 @@ We're still under construction, see the issues page if you want to help :)
 
 ## Development
 
-Just download this repo and start with
+Just fork this repo and start with
 
 ```sh
 npm run start
@@ -20,4 +20,5 @@ npm run start
 
 And that's it!
 
-We have branch protection on `master`, so try starting a new branch for your development cycle.
+You can modify all you want, then just pull request to develop
+
