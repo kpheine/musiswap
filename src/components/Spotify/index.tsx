@@ -20,8 +20,6 @@ type SpotifyProps = {
   setTracks: Function;
 };
 
-let IdsList: Array<string> = [];
-
 function Spotify(props: SpotifyProps) {
   const [token, setToken] = useState<Token>();
   const [name, setName] = useState<string>();
@@ -98,8 +96,9 @@ function Spotify(props: SpotifyProps) {
         </SpotifyLogin>
       ) : loadingMusic ? (
         <YesIMadeAProgressBarSoWhat
-          color='#1db954'
+          color='transparent'
           rate={loadingMusicRate}
+          size='200px'
         ></YesIMadeAProgressBarSoWhat>
       ) : trackList.length === 0 ? (
         <button className='sbutton neumorph' onClick={getMusic}>
