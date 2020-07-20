@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './youtube.css';
 import { googleClientId } from '../../settings';
-import { TrackData } from '../../App';
+import { TrackData, LoadingStats } from '../../App';
 import { addTrack, addPlaylist } from '../../services/youtube';
 
 import {
@@ -24,6 +24,9 @@ interface User {
 
 type youtubeProps = {
   tracks: Array<TrackData>;
+  setLoadingStats: React.Dispatch<
+    React.SetStateAction<LoadingStats | undefined>
+  >;
 };
 
 type YoutubeAddPlaylistResponse = {
@@ -71,24 +74,51 @@ function Youtube(props: youtubeProps) {
   const [imageUrl, setImageUrl] = useState<string>();
   const [photoLoaded, setPhotoLoaded] = useState<boolean>(false);
 
+  /*
+  I had to add single tracks instead of a batch because Youtube API
+  is inconsistent when using multiple requests at once. This slow
+  down the process a lot, but Google doesn't really care about
+  other developers
+  */
   const importTracks = async () => {
     const playlistName: string = 'Musiswap';
-    const miniList = props.tracks.slice(0, 11);
-    await addPlaylist(token, playlistName).then(
-      async (res: AxiosResponse<YoutubeAddPlaylistResponse>) => {
+    const convertList = props.tracks;
+    await addPlaylist(token, playlistName)
+      .then(async (res: AxiosResponse<YoutubeAddPlaylistResponse>) => {
         const playlistCode = res.data.id;
-        for (const item of miniList) {
-          const response = await addTrack(token, item, playlistCode);
+        const totalTracks = convertList.length;
+        for (const i in convertList) {
+          const index = parseInt(i);
+          props.setLoadingStats(() => {
+            return {
+              rate: index / totalTracks,
+              label: `Loading ${convertList[index].artist} - ${convertList[index].name}`,
+            };
+          });
+          const response = await addTrack(token, convertList[i], playlistCode);
           console.log(response);
         }
-        console.log(miniList);
-      },
-    );
-
-    //Check consistency of data (Because Youtube API is VERY misleading with 200 status)
+        props.setLoadingStats(() => {
+          return {
+            rate: 1,
+            label: 'Complete! Check your "Musiswap" playlist on YouTube!',
+          };
+        });
+      })
+      .catch((error) => {
+        props.setLoadingStats((prevState) => {
+          return {
+            rate: prevState?.rate || 0,
+            label: 'For some reason the loading failed, try again later',
+          };
+        });
+      });
   };
 
-  //Callback from Google login (god I hate so much union types)
+  /*
+  Callback from Google login, got in a lot of trouble trying to
+  implement this with typescript
+  */
   const successCallback = (
     res: GoogleLoginResponse | GoogleLoginResponseOffline,
   ): any => {

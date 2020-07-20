@@ -1,20 +1,27 @@
 import React from 'react';
 
 type ProgressProps = {
-  color: string;
+  color?: string;
   rate: number;
+  className?: string;
+  size?: string;
 };
 
-const YesIMadeAProgressBarSoWhat = ({ color, rate }: ProgressProps) => {
+const YesIMadeAProgressBarSoWhat = ({
+  color,
+  rate,
+  className,
+  size,
+}: ProgressProps) => {
   const containerStyle = {
     backgroundColor: 'transparent',
     borderRadius: 50,
-    width: '200px',
+    width: size || '100%',
     height: '40px',
   };
 
   const progressStyle = {
-    backgroundColor: color,
+    backgroundColor: color || 'transparent',
     width: `${rate * 100}%`,
     height: '100%',
     borderRadius: 50,
@@ -26,7 +33,7 @@ const YesIMadeAProgressBarSoWhat = ({ color, rate }: ProgressProps) => {
 
   const textStyle = {
     fontWeight: 'bold' as 'bold', //sometimes fuck typescript
-    color: 'transparent',
+    color: 'rgba(0,0,0,0.15)',
     fontSize: '1.5em',
     marginRight: '5px',
     textShadow:
@@ -34,7 +41,7 @@ const YesIMadeAProgressBarSoWhat = ({ color, rate }: ProgressProps) => {
   };
 
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} className={className}>
       <div style={progressStyle} className={'neumorph'}>
         <span style={textStyle}>{`${(rate * 100).toFixed(0)}%`}</span>
       </div>

@@ -1,11 +1,36 @@
-.App {}
+.App {
+  user-select: none;
+  color: white;
+  display: flex
+}
+
+.infoDiv {
+  position: fixed;
+  bottom: 10px;
+  right: 10px
+}
 
 .main {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  color: white;
-  user-select: none;
+  width: 100vw;
+
+}
+
+.icon {
+  margin: 15px;
+  color: blue
+}
+
+.loadingBar {
+  position: fixed;
+  bottom: calc(50vh - 20px)
+}
+
+.loadingTxt {
+  font-style: italic;
+  font-size: small;
 }
 
 .main .halfPart {
@@ -19,6 +44,11 @@
 
   .main .halfPart {
     height: 100vh;
+  }
+
+  .loadingBar {
+    bottom: 200px;
+    margin-left: 15vw
   }
 }
 
