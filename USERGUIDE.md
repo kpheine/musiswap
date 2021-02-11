@@ -26,7 +26,7 @@ Google has set a quota limit to sending requests of adding videos to a playlist.
 
 ___
 
-> ** It says "App unverified" on login, are you sure it's safe?
+> **It says "App unverified" on login, are you sure it's safe?**
 
 Google has **A LOT** of bureaucracy, and verifying this app is out key next step into increasing quota and reducing errors.
 
